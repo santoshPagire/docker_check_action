@@ -1,0 +1,26 @@
+name: Docker Build and Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t custom-nginx:latest .
+
+      - name: Save Docker image as artifact
+        run: |
+          docker save custom-nginx:latest -o custom-nginx.tar
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-image
+          path: my-image.tar
