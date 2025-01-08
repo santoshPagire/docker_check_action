@@ -51,3 +51,7 @@ jobs:
       - name: Check running container 
         run: |
             docker ps
+
+      - name: check output
+        run: |
+            curl localhost:8082
