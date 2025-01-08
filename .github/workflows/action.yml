@@ -22,7 +22,7 @@ jobs:
           docker save custom-nginx:latest -o custom-nginx.tar
   
       - name: Upload Docker image as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: docker-image
           path: custom-nginx.tar
