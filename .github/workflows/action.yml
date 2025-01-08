@@ -26,3 +26,28 @@ jobs:
         with:
           name: docker-image
           path: custom-nginx.tar
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build  
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download Docker image artifact
+        uses: actions/download-artifact@v3  
+        with:
+            name: docker-image
+
+      - name: Load Docker image
+        run: |
+            docker load -i custom-nginx.tar
+
+      - name: Docker Run container
+        run: |
+            docker run -d -p 8080:80 --name nginx-container custom-nginx:latest
+
+      - name: Check running container 
+        run: |
+            docker ps
