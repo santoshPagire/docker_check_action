@@ -54,4 +54,4 @@ jobs:
 
       - name: check output
         run: |
-            curl localhost:8082
+            curl localhost:8080
