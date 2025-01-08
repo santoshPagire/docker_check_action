@@ -17,10 +17,12 @@ jobs:
         run: |
           docker build -t custom-nginx:latest .
 
-      - name: Save Docker image as artifact
+      - name: Save Docker image to tar file
         run: |
           docker save custom-nginx:latest -o custom-nginx.tar
+  
+      - name: Upload Docker image as artifact
         uses: actions/upload-artifact@v2
         with:
           name: docker-image
-          path: my-image.tar
+          path: custom-nginx.tar
